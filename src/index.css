@@ -5,3 +5,14 @@
   width: 300px !important;
   height: 200px !important;
 }
+
+.custom-navbar {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 991.98px) {
+  .custom-navbar {
+    background-color: #03454A !important;
+  }
+}

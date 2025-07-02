@@ -19,20 +19,17 @@ def register_view(request):
         return JsonResponse({"message": "User registered successfully"})
 
 @csrf_exempt
-def login_view(request):
+def login_user(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        email = data.get("email")
+        username = data.get("username")  # use username for Django auth
         password = data.get("password")
-        try:
-            username = User.objects.get(email=email).username
-        except User.DoesNotExist:
-            return JsonResponse({"error": "Invalid email or password"}, status=400)
         user = authenticate(username=username, password=password)
-        if user:
+        if user is not None:
             login(request, user)
-            return JsonResponse({"message": "Login successful"})
-        return JsonResponse({"error": "Invalid credentials"}, status=400)
+            return JsonResponse({"username": username, "status": "logged in"})
+        else:
+            return JsonResponse({"error": "Invalid credentials"}, status=400)
 
 @csrf_exempt
 def logout_view(request):

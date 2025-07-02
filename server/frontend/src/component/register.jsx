@@ -11,9 +11,26 @@ export const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    alert(`Registered: ${formData.name}`);
+    try {
+      const response = await fetch("/api/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        // Optionally redirect to login page here
+      } else {
+        alert(data.error);
+      }
+    } catch (err) {
+      alert("Network error", err);
+    }
   };
 
   return (
@@ -72,5 +89,4 @@ export const Register = () => {
   );
 };
 
-
-export default Register
+export default Register;

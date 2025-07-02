@@ -1,12 +1,34 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getCookie } from "./constent";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
+const Login = ({ setUser }) => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const csrftoken = getCookie("csrftoken");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert(`Logged in with Email: ${email}`);
+    try {
+      const response = await fetch("/api/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrftoken,
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setUser(data.username); // Set user in App state
+        navigate("/");
+      } else {
+        alert("failed", data.error);
+      }
+    } catch (err) {
+      alert("Network error", err);
+    }
   };
 
   return (
@@ -18,12 +40,12 @@ const Login = () => {
         <h2 className="text-center mb-4">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-3">
-            <label className="form-label">Email address</label>
+            <label className="form-label">Username</label>
             <input
-              type="email"
+              type="text"
               className="form-control"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
             />
           </div>

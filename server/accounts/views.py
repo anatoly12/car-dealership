@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.views.generic import TemplateView
+
 
 @csrf_exempt
 def register_view(request):
@@ -36,3 +38,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return JsonResponse({"message": "Logged out successfully"})
+
+
+class FrontendAppView(TemplateView):
+    template_name = 'index.html'

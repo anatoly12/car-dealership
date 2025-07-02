@@ -10,13 +10,14 @@ from django.views.generic import TemplateView
 def register_view(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        username = data.get("name")
+        username = data.get("username")
         email = data.get("email")
         password = data.get("password")
         if User.objects.filter(username=username).exists():
             return JsonResponse({"error": "Username already exists"}, status=400)
         user = User.objects.create_user(username=username, email=email, password=password)
-        return JsonResponse({"message": "User registered successfully"})
+        login(request, user)  # Log in the user after registration
+        return JsonResponse({"username": username, "status": "registered and logged in"})
 
 @csrf_exempt
 def login_user(request):

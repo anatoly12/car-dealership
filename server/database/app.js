@@ -8,7 +8,7 @@ app.use(express.json());
 const dealers = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'dealerships.json'), 'utf8'));
 const reviews = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'reviews.json'), 'utf8'));
 
-const PORT = process.env.PORT || 8888; 
+const PORT = 8080; 
 
 // GET all dealers
 app.get('/fetchDealers', (req, res) => {

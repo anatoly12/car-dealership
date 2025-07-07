@@ -18,7 +18,7 @@ app.get('/fetchDealers', (req, res) => {
 // GET dealers by state
 app.get('/fetchDealers/:state', (req, res) => {
   const state = req.params.state;
-  const filtered = dealers.filter(d => d.state.toLowerCase() === state.toLowerCase());
+  const filtered = dealers.filter(d => d?.state?.toLowerCase() === state?.toLowerCase());
   res.json(filtered);
 });
 

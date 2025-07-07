@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Home = () => (
   <div
     className="d-flex align-items-center justify-content-center vh-100 text-white"
@@ -12,9 +14,9 @@ const Home = () => (
       <h2 className="h3 mb-5">PRESTIGE USED CARS IN IPSWICH AND SUFFOLK</h2>
       <div className="d-flex justify-content-center gap-3">
         <button className="btn btn-outline-light btn-lg">
-          BROWSE SHOWROOM
+          <Link className="nav-link text-white" to="/dealerships">View Dealerships</Link>
         </button>
-        <button className="btn btn-outline-light btn-lg">SELL YOUR CAR</button>
+        {/* <button className="btn btn-outline-light btn-lg">SELL YOUR CAR</button> */}
       </div>
     </div>
   </div>

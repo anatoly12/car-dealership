@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Dealer One",
+    "location": "Kansas"
+  },
+  {
+    "id": 2,
+    "name": "Dealer Two",
+    "location": "Missouri"
+  }
+]

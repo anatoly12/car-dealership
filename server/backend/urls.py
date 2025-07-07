@@ -8,7 +8,8 @@ import os
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('/admin', admin.site.urls),
+    path('accounts/', include('accounts.urls')),
     path('api/', include('accounts.urls')),  # now this will work
     path('', FrontendAppView.as_view(), name='index.html'),
 

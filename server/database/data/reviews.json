@@ -16,5 +16,23 @@
     "car_model": "A-Class",
     "year": 2015,
     "id": 2
+  },
+  {
+    "dealerId": 1,
+    "text": "sentiment testing review",
+    "purchaseDate": "2025-07-08",
+    "car_make": "Audi",
+    "car_model": "A4",
+    "year": 2018,
+    "id": 3
+  },
+  {
+    "dealerId": 1,
+    "text": "deployed_add_review testing review",
+    "purchaseDate": "2025-07-10",
+    "car_make": "Toyota",
+    "car_model": "Camry",
+    "year": 2022,
+    "id": 4
   }
 ]

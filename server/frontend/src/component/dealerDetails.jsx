@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 function DealerDetail({ user }) {
-  const { dealerId } = useParams();
+  const { id } = useParams();
   const [dealer, setDealer] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/fetchDealer/${dealerId}`)
+    fetch(`/accounts/dealer/${id}`)
       .then((res) => res.json())
-      .then((data) => setDealer(data));
-    fetch(`/api/fetchReviews/dealer/${dealerId}`)
+      .then((data) => setDealer(data.dealer));
+    fetch(`/accounts/reviews/dealer/${id}`)
       .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, [dealerId]);
+      .then((data) => setReviews(data.reviews || []));
+  }, [id]);
 
   if (!dealer) return <div>Loading dealer...</div>;
 
@@ -52,12 +52,12 @@ function DealerDetail({ user }) {
 
       {showForm && user && (
         <ReviewForm
-          dealerId={dealerId}
+          dealerId={id}
           onPosted={() => {
             setShowForm(false);
-            fetch(`/api/fetchReviews/dealer/${dealerId}`)
+            fetch(`/accounts/reviews/dealer/${id}`)
               .then((res) => res.json())
-              .then(setReviews);
+              .then((data) => setReviews(data.reviews || []));
           }}
         />
       )}
@@ -116,7 +116,7 @@ function ReviewForm({ dealerId, onPosted }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/postReview", {
+    fetch("/api/add_review", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

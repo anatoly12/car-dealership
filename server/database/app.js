@@ -45,4 +45,23 @@ app.get('/fetchReviews/dealer/:id', (req, res) => {
   res.json(filtered);
 });
 
+// POST a new review
+// POST a new review
+app.post('/insert_review', (req, res) => {
+  const review = req.body;
+  // Ensure dealerId and year are numbers
+  review.dealerId = Number(review.dealerId);
+  review.year = Number(review.year);
+  review.id = reviews.length ? reviews[reviews.length - 1].id + 1 : 1;
+  reviews.push(review);
+
+  // Save to file
+  fs.writeFileSync(
+    path.join(__dirname, 'data', 'reviews.json'),
+    JSON.stringify(reviews, null, 2)
+  );
+
+  res.json({ status: "success", review });
+});
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

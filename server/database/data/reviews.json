@@ -1,12 +1,20 @@
 [
   {
-    "id": 1,
-    "name": "Dealer One",
-    "location": "Kansas"
+    "dealerId": 1,
+    "text": "testing review",
+    "purchaseDate": "2025-07-08",
+    "car_make": "NISSAN",
+    "car_model": "Pathfinder",
+    "year": 1,
+    "id": 1
   },
   {
-    "id": 2,
-    "name": "Dealer Two",
-    "location": "Missouri"
+    "dealerId": 1,
+    "text": "Highly recommending dealer",
+    "purchaseDate": "2025-07-09",
+    "car_make": "Mercedes",
+    "car_model": "A-Class",
+    "year": 2015,
+    "id": 2
   }
 ]
